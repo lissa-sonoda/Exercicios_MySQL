@@ -3,8 +3,8 @@ drop database db_acervo35;
 
 use db_acervo35;
 create table tb_usuario(
-	id_usuario bigint auto_increment,
-	nome varchar(255) not null,
+    id_usuario bigint auto_increment,
+    nome varchar(255) not null,
     email varchar(255) not null,
     nascimento_data date,
     senha varchar(255) not null,
