@@ -27,15 +27,15 @@ Popule esta tabela categoria com até 5 dados.
 */
 
 create table tb_categoria(
-	id_categ bigint(3) auto_increment,
-	nome_categ varchar(30) not null,
+    id_categ bigint(3) auto_increment,
+    nome_categ varchar(30) not null,
     tipo_categ varchar(255) not null,
     primary key(id_categ)
 );
 
 insert into tb_categoria(nome_categ, tipo_categ) 
 	values ("Tradicionais", "Salgada"),
-			("Especiais", "Salgada"),
+	    ("Especiais", "Salgada"),
             ("Vegetarianas", "Salgada"),
             ("Sensacionais", "Doce"),
             ("Frutas", "Doce");
@@ -51,19 +51,19 @@ Popule esta tabela pizza com até 8 dados.
 */
 
 create table tb_pizza(
-	id_pizza bigint(3) auto_increment,
+    id_pizza bigint(3) auto_increment,
     nome_pizza varchar(30) not null,
     ingrediente varchar(255) not null,
     tamanho varchar(10) not null,
     preco real not null,
-	fk_categ bigint(3),
+    fk_categ bigint(3) not null,
     primary key(id_pizza),
     foreign key(fk_categ) references tb_categoria(id_categ)
 );
 
 insert into tb_pizza(nome_pizza, ingrediente, tamanho, preco, fk_categ)
 	values ("Americana", "mussarela, presunto, tomate e azeitonas", "grande", 35.40, 1),
-			("Baiana", "mussarela, calabresa moída, ovos, pimenta, cebola e azeitonas", "família", 48.70, 1),
+	    ("Baiana", "mussarela, calabresa moída, ovos, pimenta, cebola e azeitonas", "família", 48.70, 1),
             ("Noruega", "mussarela, bacalhau, catupiry, parmesão e azeitonas", "grande", 47.50, 2),
             ("Picanha com Rúcula", "mussarela, fatias de picanha defumada, rúcula e azeitonas", "família", 65.80, 2),
             ("Rúcula", "mussarela, rúcula, tomate seco e azeitonas", "grande", 33.10, 3),
@@ -82,11 +82,11 @@ Faça um select que retorne os Produtos com o valor maior do que 45 reais.
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_pizza.preco > 45
-	order by tb_categoria.nome_categ;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_pizza.preco > 45
+    order by tb_categoria.nome_categ;
     
 /*
 Enunciado - parte 5
@@ -97,11 +97,11 @@ Faça um select trazendo os Produtos com valor entre 29 e 60 reais.
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_pizza.preco between 29 and 60
-	order by tb_categoria.tipo_categ desc;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_pizza.preco between 29 and 60
+    order by tb_categoria.tipo_categ desc;
     
 /*
 Enunciado - parte 6
@@ -112,11 +112,11 @@ Faça um select utilizando LIKE buscando os Produtos que tem a letra C.
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_pizza.nome_pizza like "%c%"
-	order by tb_categoria.tipo_categ desc;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_pizza.nome_pizza like "%c%"
+    order by tb_categoria.tipo_categ desc;
     
 /*
 Enunciado - parte 7
@@ -140,62 +140,62 @@ Faça um select onde traga todos os Produtos de uma categoria específica
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.tipo_categ like "%Doce%"
-	order by tb_pizza.nome_pizza;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.tipo_categ like "%Doce%"
+    order by tb_pizza.nome_pizza;
 
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.tipo_categ like "%Salgada%"
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.tipo_categ like "%Salgada%"
 	order by tb_pizza.nome_pizza;
     
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.id_categ like 1
-	order by tb_pizza.nome_pizza;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.id_categ like 1
+    order by tb_pizza.nome_pizza;
     
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.id_categ like 2
-	order by tb_pizza.nome_pizza;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.id_categ like 2
+    order by tb_pizza.nome_pizza;
 
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.id_categ like 3
-	order by tb_pizza.nome_pizza;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.id_categ like 3
+    order by tb_pizza.nome_pizza;
     
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.id_categ like 4
-	order by tb_pizza.nome_pizza;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.id_categ like 4
+    order by tb_pizza.nome_pizza;
     
 select tb_pizza.nome_pizza as "Nome da Pizza", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_pizza.preco as "Preço"
-	from tb_pizza inner join tb_categoria
-	on tb_categoria.id_categ = tb_pizza.fk_categ
-	where tb_categoria.id_categ like 5
-	order by tb_pizza.nome_pizza;
+    tb_pizza.preco as "Preço"
+    from tb_pizza inner join tb_categoria
+    on tb_categoria.id_categ = tb_pizza.fk_categ
+    where tb_categoria.id_categ like 5
+    order by tb_pizza.nome_pizza;

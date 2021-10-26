@@ -27,16 +27,16 @@ Popule esta tabela categoria com até 5 dados.
 */
 
 create table tb_categoria(
-	id_categ bigint(3) auto_increment,
-	nome_categ varchar(30) not null,
+    id_categ bigint(3) auto_increment,
+    nome_categ varchar(30) not null,
     tipo_categ varchar(255) not null,
     primary key(id_categ)
 );
 
 insert into tb_categoria(nome_categ, tipo_categ) 
 	values ("Shampoo", "Cuidados Diários"),
-			("Sabonete", "Cuidados Diários"),
-			("Comprimido", "Medicamentos"),
+	    ("Sabonete", "Cuidados Diários"),
+	    ("Comprimido", "Medicamentos"),
             ("Xarope", "Medicamentos"),
             ("Cápsula", "Vitaminas"),
             ("Fralda", "Mamãe e Bebê"),
@@ -53,20 +53,20 @@ Popule esta tabela produto com até 8 dados.
 */
 
 create table tb_produto(
-	id_prod bigint(3) auto_increment,
+    id_prod bigint(3) auto_increment,
     nome_prod varchar(255) not null,
     quantidade real not null,
     unidade varchar(10) not null,
     preco real not null,
-	fk_categ bigint(3),
+    fk_categ bigint(3) not null,
     primary key(id_prod),
     foreign key(fk_categ) references tb_categoria(id_categ)
 );
 
 insert into tb_produto(nome_prod, quantidade, unidade, preco, fk_categ)
 	values ("Shampoo Seda Recarga Natural Pureza Detox", 325, "ml", 10.69, 1),
-			("Shampoo Pantene Bambu Nutre e Cresce", 200, "ml", 13.50, 1),
-			("Sabonete em Barra Lux Botanicals Lavanda", 85, "g", 2.29, 2),
+	    ("Shampoo Pantene Bambu Nutre e Cresce", 200, "ml", 13.50, 1),
+	    ("Sabonete em Barra Lux Botanicals Lavanda", 85, "g", 2.29, 2),
             ("Sabonete Antibacteriano Cremoso Needs", 250, "ml", 7.99, 2),
             ("Novalgina com 10 comprimidos", 1, "g", 18.90, 3),
             ("Loratadina Neo Química com 12 comprimidos", 10, "mg", 11.90, 3),
@@ -88,11 +88,11 @@ Faça um select que retorne os Produtos com o valor maior do que 50 reais.
 select tb_produto.nome_prod as "Nome do Produto", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_produto.preco as "Preço"
-	from tb_produto inner join tb_categoria
-	on tb_categoria.id_categ = tb_produto.fk_categ
-	where tb_produto.preco > 45
-	order by tb_categoria.nome_categ;
+    tb_produto.preco as "Preço"
+    from tb_produto inner join tb_categoria
+    on tb_categoria.id_categ = tb_produto.fk_categ
+    where tb_produto.preco > 45
+    order by tb_categoria.nome_categ;
     
 /*
 Enunciado - parte 5
@@ -103,11 +103,11 @@ Faça um select trazendo os Produtos com valor entre 3 e 60 reais.
 select tb_produto.nome_prod as "Nome do Produto", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_produto.preco as "Preço"
-	from tb_produto inner join tb_categoria
-	on tb_categoria.id_categ = tb_produto.fk_categ
-	where tb_produto.preco between 3 and 60
-	order by tb_categoria.tipo_categ desc;
+    tb_produto.preco as "Preço"
+    from tb_produto inner join tb_categoria
+    on tb_categoria.id_categ = tb_produto.fk_categ
+    where tb_produto.preco between 3 and 60
+    order by tb_categoria.tipo_categ desc;
     
 /*
 Enunciado - parte 6
@@ -118,11 +118,11 @@ Faça um select utilizando LIKE buscando os Produtos com a letra B.
 select tb_produto.nome_prod as "Nome do Produto", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_produto.preco as "Preço"
-	from tb_produto inner join tb_categoria
-	on tb_categoria.id_categ = tb_produto.fk_categ
-	where tb_produto.nome_prod like "%b%"
-	order by tb_categoria.tipo_categ desc;
+    tb_produto.preco as "Preço"
+    from tb_produto inner join tb_categoria
+    on tb_categoria.id_categ = tb_produto.fk_categ
+    where tb_produto.nome_prod like "%b%"
+    order by tb_categoria.tipo_categ desc;
     
 /*
 Enunciado - parte 7
@@ -146,17 +146,17 @@ Faça um select onde traga todos os Produtos de uma categoria específica
 select tb_produto.nome_prod as "Nome do Produto", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_produto.preco as "Preço"
-	from tb_produto inner join tb_categoria
-	on tb_categoria.id_categ = tb_produto.fk_categ
-	where tb_categoria.tipo_categ like "%Medicamentos%"
-	order by tb_produto.nome_prod;
+    tb_produto.preco as "Preço"
+    from tb_produto inner join tb_categoria
+    on tb_categoria.id_categ = tb_produto.fk_categ
+    where tb_categoria.tipo_categ like "%Medicamentos%"
+    order by tb_produto.nome_prod;
 
 select tb_produto.nome_prod as "Nome do Produto", 
     tb_categoria.nome_categ as "Categoria",
     tb_categoria.tipo_categ as "Tipo",
-	tb_produto.preco as "Preço"
-	from tb_produto inner join tb_categoria
-	on tb_categoria.id_categ = tb_produto.fk_categ
-	where tb_categoria.id_categ like 1
-	order by tb_produto.nome_prod;
+    tb_produto.preco as "Preço"
+    from tb_produto inner join tb_categoria
+    on tb_categoria.id_categ = tb_produto.fk_categ
+    where tb_categoria.id_categ like 1
+    order by tb_produto.nome_prod;
