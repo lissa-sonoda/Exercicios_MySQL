@@ -22,9 +22,9 @@ CREATE TABLE `tb_usuarios` (
 	PRIMARY KEY (`id_user`)
 );
 
-ALTER TABLE `tb_temas` ADD CONSTRAINT `tb_temas_fk0` FOREIGN KEY (`id_tema`) REFERENCES `tb_postagens`(`fk_tema_id`);
+ALTER TABLE `tb_postagens` ADD CONSTRAINT `tb_postagens_fk0` FOREIGN KEY (`fk_tema_id`) REFERENCES `tb_temas`(`id_tema`);
 
-ALTER TABLE `tb_usuarios` ADD CONSTRAINT `tb_usuarios_fk0` FOREIGN KEY (`id_user`) REFERENCES `tb_postagens`(`fk_usuario_id`);
+ALTER TABLE `tb_postagens` ADD CONSTRAINT `tb_postagens_fk1` FOREIGN KEY (`fk_usuario_id`) REFERENCES `tb_usuarios`(`id_user`);
 
 
 
